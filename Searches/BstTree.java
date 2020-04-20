@@ -67,6 +67,15 @@ public class BstTree {
         }
     }
 
+
+    public void printInOrderDFS(BstNode root) {
+       if (root != null) {
+            System.out.print( root.data + " ");
+            printInOrderDFS(root.left);
+            printInOrderDFS(root.right);
+       }
+    }
+
     /*
      * 10 / \ 4 15 / \ / \ 2 7 12 17
      */
@@ -105,6 +114,10 @@ public class BstTree {
         tree2.insertValue(20);
 
         tree2.printLevelOrderBFS();
+        System.out.println("");
+        tree2.printInOrderDFS(tree2.root);
+        System.out.println("");
+        
 
     }
 }
