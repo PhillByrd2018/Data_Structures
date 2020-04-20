@@ -38,12 +38,41 @@ public class BstTree {
         return root;
     }
 
+    public void printLevelOrderBFS() {
+        BstNode root = this.root;
+        int height = getLevelsOfTreeBFS(root);
+
+        for (int i = 0; i < height; i++) {
+            printLevelsOfTreeBFS(root, i);
+        }
+    }
+
+    public int getLevelsOfTreeBFS(BstNode root) {
+        if (root == null) {
+            return 0;
+        } else {
+            return 1 + Math.max(getLevelsOfTreeBFS(root.left), getLevelsOfTreeBFS(root.right));
+        }
+    }
+
+    public void printLevelsOfTreeBFS(BstNode root, int level) {
+        if (root == null) {
+            return;
+        }
+        if (level == 0) {
+            System.out.print(root.data + " ");
+        } else if (level > 0) {
+            printLevelsOfTreeBFS(root.left, level -1);
+            printLevelsOfTreeBFS(root.right, level -1);
+        }
+    }
+
     /*
      * 10 / \ 4 15 / \ / \ 2 7 12 17
      */
     public static void main(String[] args) {
         // BstNode root = new BstNode(10);
-        // BstTree tree = new BstTree(root);
+        // BstTree tree = new BstTree();
         // tree.root.left = new BstNode(4);
         // tree.root.left.left = new BstNode(2);
         // tree.root.left.right = new BstNode(7);
@@ -69,6 +98,13 @@ public class BstTree {
         System.out.println("Search: " + tree2.search(tree2.root, 0));
         tree2.insertValue(25);
         System.out.println("Search: " + tree2.search(tree2.root, 25));
-       
+        tree2.insertValue(10);
+        tree2.insertValue(55);
+        tree2.insertValue(15);
+        tree2.insertValue(30);
+        tree2.insertValue(20);
+
+        tree2.printLevelOrderBFS();
+
     }
 }
